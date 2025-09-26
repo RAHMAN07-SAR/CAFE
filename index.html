@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cafe in Bengaluru — great coffee, artisanal pastries, cozy ambience. Reserve tables, order online, read our blog and contact us." />
+  <title>Cafe — Bengaluru | Cozy. Craft. Community.</title>
+  <!-- Tailwind CDN (Play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind custom config
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#e89a1d',
+            darkbg: '#0f1a1a',
+            accent: '#f6a01a'
+          },
+          fontFamily: {
+            serif: ['Merriweather', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* small helpers */
+    .max-w-6x1 { max-width: 72rem; } /* custom request: '6x1' interpreted as 6xl~72rem */
+    /* nice hero text stroke */
+    .hero-title { text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+    /* tiny accessible focus for keyboard users */
+    :focus { outline: 3px solid rgba(230,154,29,0.25); outline-offset: 2px; }
+  </style>
+</head>
+<body class="antialiased text-gray-800 bg-white">
+  <!-- Skip to content -->
+  <a href="#main" class="sr-only focus:not-sr-only p-2">Skip to content</a>
+
+  <!-- Header / Nav -->
+  <header class="bg-white shadow sticky top-4 z-40 rounded-xl mx-6">
+    <div class="max-w-6x1 mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="#" class="flex items-center gap-3" aria-label="Cafe home">
+          <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="Cafe logo" class="h-12 w-12 rounded" />
+          <div>
+            <h1 class="text-2xl font-serif">Cafe</h1>
+            <p class="text-xs text-gray-500">Food & Drinks — Bengaluru</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="menu.html" class="hover:text-brand">Menu</a>
+        <a href="gallery.html" class="hover:text-brand">Gallery</a>
+        <a href="blog.html" class="hover:text-brand">Blog</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="#reservation" class="hidden md:inline-block bg-brand text-white px-5 py-3 rounded-lg font-semibold shadow">Reservation</a>
+        <button id="mobileMenuBtn" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden p-2 rounded hover:bg-gray-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu slide-out -->
+    <div id="mobileMenu" class="md:hidden fixed inset-0 bg-black/40 hidden z-50" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="absolute right-0 top-0 h-full w-72 bg-white p-6 shadow-lg">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="logo" class="h-10 w-10 rounded" />
+            <span class="font-semibold">Cafe</span>
+          </div>
+          <button id="closeMobileMenu" class="p-2 rounded hover:bg-gray-100">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <nav class="mt-6 flex flex-col gap-3" aria-label="Mobile Primary">
+          <a href="index.html" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+          <a href="about.html" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
+          <a href="menu.html" class="py-2 px-3 rounded hover:bg-gray-50">Menu</a>
+          <a href="gallery.html" class="py-2 px-3 rounded hover:bg-gray-50">Gallery</a>
+          <a href="blog.html" class="py-2 px-3 rounded hover:bg-gray-50">Blog</a>
+          <a href="contact.html" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+        </nav>
+
+        <div class="mt-6 border-t pt-4">
+          <p class="text-sm text-gray-600">Follow us</p>
+          <div class="flex gap-3 mt-3">
+            <a href="#" aria-label="Facebook" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="X" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- Main content -->
+  <main id="main">
+    <!-- Hero -->
+    <section id="home" class="relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=60&auto=format&fit=crop');">
+      <div class="bg-black/50">
+        <div class="max-w-6x1 mx-auto px-6 py-32 text-white flex items-center gap-12">
+          <div class="w-7/12">
+            <span class="inline-block bg-accent px-3 py-1 rounded text-xs font-semibold mb-4">HELLO, NEW FRIEND!</span>
+            <h2 class="hero-title text-6xl md:text-7xl font-serif leading-tight">Reserve Your Table Today</h2>
+            <p class="mt-6 text-lg text-gray-200 max-w-xl">Warm, handcrafted coffee and seasonal treats — a cosy hideaway in the heart of Bengaluru.</p>
+            <div class="mt-8 flex items-center gap-6">
+              <a href="#reservation" class="bg-brand px-6 py-3 rounded-lg font-semibold shadow hover:opacity-95">Reservation</a>
+              <a href="#shop" class="text-white/80 uppercase tracking-widest">Online Shop</a>
+            </div>
+            <!-- pagination dots mimic -->
+            <div class="mt-8 flex items-center gap-3">
+              <span class="h-3 w-3 rounded-full bg-white/80"></span>
+              <span class="h-3 w-3 rounded-full bg-brand shadow"></span>
+              <span class="h-3 w-3 rounded-full bg-white/80"></span>
+            </div>
+          </div>
+          <div class="w-5/12 hidden lg:block">
+            <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=900&q=60&auto=format&fit=crop" alt="delicious food" class="rounded shadow-lg" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured services / offerings -->
+    <section id="menu" class="py-16 bg-white">
+      <div class="max-w-6x1 mx-auto px-6">
+        <h3 class="text-sm text-brand font-semibold">OUR OFFERS</h3>
+        <h2 class="text-3xl font-serif mt-2">Featured & Popular</h2>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <article class="p-6 border rounded-lg shadow-sm" aria-labelledby="card1title">
+            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=800&q=60&auto=format&fit=crop" alt="artisan coffee" class="h-48 w-full object-cover rounded mb-4" />
+            <h4 id="card1title" class="font-semibold">Artisan Coffee</h4>
+            <p class="text-sm text-gray-600 mt-2">Single origin espresso, velvety milk and seasonal brews.</p>
+            <a href="#" class="mt-4 inline-block text-brand text-sm">View Menu →</a>
+          </article>
+          <!-- Card 2 -->
+          <article class="p-6 border rounded-lg shadow-sm" aria-labelledby="card2title">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=60&auto=format&fit=crop" alt="fresh pastries" class="h-48 w-full object-cover rounded mb-4" />
+            <h4 id="card2title" class="font-semibold">Fresh Pastries</h4>
+            <p class="text-sm text-gray-600 mt-2">Baked daily with locally sourced ingredients.</p>
+            <a href="#" class="mt-4 inline-block text-brand text-sm">Order Now →</a>
+          </article>
+          <!-- Card 3 -->
+          <article class="p-6 border rounded-lg shadow-sm" aria-labelledby="card3title">
+            <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800&q=60&auto=format&fit=crop" alt="cozy ambience" class="h-48 w-full object-cover rounded mb-4" />
+            <h4 id="card3title" class="font-semibold">Private Events</h4>
+            <p class="text-sm text-gray-600 mt-2">Host book-clubs, small gatherings or product launches.</p>
+            <a href="#contact" class="mt-4 inline-block text-brand text-sm">Enquire →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Invite -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=900&q=60&auto=format&fit=crop" alt="bar counter" class="rounded shadow-lg" />
+          <button class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent rounded-full p-6 shadow-lg" aria-label="Play intro video">
+            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 3v18l15-9L5 3z" /></svg>
+          </button>
+        </div>
+        <div>
+          <span class="text-sm text-brand font-semibold">ABOUT US</span>
+          <h3 class="text-4xl font-serif mt-4">We invite you to visit our restaurant</h3>
+          <p class="mt-6 text-gray-600">Assumenda possimus eaque illo iste, autem. Porro eveniet, autem ipsam vitae amet repellat repudiandae tenetur, quod corrupti consectetur cum? Repudiandae dignissimos fugiat sit nam.</p>
+          <div class="mt-6 flex items-center gap-4">
+            <a href="#contact" class="bg-brand px-5 py-3 rounded shadow text-white font-semibold">Read More</a>
+            <div class="flex items-center gap-3 text-gray-500">
+              <a href="#" aria-label="facebook">FB</a>
+              <a href="#" aria-label="instagram">IG</a>
+              <a href="#" aria-label="x">X</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery / Portfolio with filter tabs -->
+    <section id="gallery" class="py-16">
+      <div class="max-w-6x1 mx-auto px-6">
+        <h3 class="text-sm text-brand font-semibold">GALLERY</h3>
+        <h2 class="text-3xl font-serif mt-2">Moments & Menu</h2>
+
+        <div class="mt-6 flex gap-3" role="tablist" aria-label="Gallery categories">
+          <button class="px-4 py-2 rounded bg-brand text-white" data-filter="all">All</button>
+          <button class="px-4 py-2 rounded border" data-filter="coffee">Coffee</button>
+          <button class="px-4 py-2 rounded border" data-filter="pastry">Pastry</button>
+          <button class="px-4 py-2 rounded border" data-filter="space">Space</button>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+          <!-- items with data-category -->
+          <figure class="rounded overflow-hidden shadow" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=60&auto=format&fit=crop" alt="latte art" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Latte Art — House Blend</figcaption>
+          </figure>
+          <figure class="rounded overflow-hidden shadow" data-category="pastry">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=60&auto=format&fit=crop" alt="croissant" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Buttery Croissant</figcaption>
+          </figure>
+          <figure class="rounded overflow-hidden shadow" data-category="space">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop" alt="interior" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Our Cozy Interior</figcaption>
+          </figure>
+          <figure class="rounded overflow-hidden shadow" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=60&auto=format&fit=crop" alt="espresso" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Espresso Shots</figcaption>
+          </figure>
+          <figure class="rounded overflow-hidden shadow" data-category="pastry">
+            <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=800&q=60&auto=format&fit=crop" alt="cakes" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Seasonal Cakes</figcaption>
+          </figure>
+          <figure class="rounded overflow-hidden shadow" data-category="space">
+            <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=800&q=60&auto=format&fit=crop" alt="outdoor seating" class="w-full h-56 object-cover" />
+            <figcaption class="p-4">Outdoor Seating</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials carousel -->
+    <section id="testimonials" class="py-16 bg-gray-100">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h3 class="text-sm text-brand font-semibold">REVIEWS</h3>
+        <h2 class="text-3xl font-serif mt-2">What our guests say</h2>
+        <div class="mt-8 relative">
+          <div id="testiTrack" class="overflow-hidden">
+            <div class="flex transition-transform duration-500" style="width:300%">
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"Best coffee in town — friendly staff and calm atmosphere."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Priya K., Bengaluru</footer>
+              </blockquote>
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"Beautiful pastries and a great spot for remote work."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Arun M., Bengaluru</footer>
+              </blockquote>
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"Perfect place for small events and meetups."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Sneha R., Bengaluru</footer>
+              </blockquote>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-center gap-3">
+            <button class="p-2 rounded shadow" id="prevTesti" aria-label="Previous testimonial">◀</button>
+            <button class="p-2 rounded shadow" id="nextTesti" aria-label="Next testimonial">▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing / Packages -->
+    <section id="pricing" class="py-16">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h3 class="text-sm text-brand font-semibold">PRICING</h3>
+        <h2 class="text-3xl font-serif mt-2">Choose your package</h2>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 border rounded-lg">
+            <h4 class="text-xl font-semibold">Basic</h4>
+            <p class="mt-4 text-gray-600">Coffee subscription — 5 cups / month</p>
+            <div class="mt-6 text-3xl font-bold">₹499</div>
+            <button class="mt-6 bg-brand text-white px-4 py-2 rounded">Purchase</button>
+          </div>
+          <div class="p-6 border-2 border-brand rounded-lg shadow-lg">
+            <h4 class="text-xl font-semibold">Popular</h4>
+            <p class="mt-4 text-gray-600">10 cups / month + pastry discount</p>
+            <div class="mt-6 text-3xl font-bold">₹899</div>
+            <button class="mt-6 bg-brand text-white px-4 py-2 rounded">Purchase</button>
+          </div>
+          <div class="p-6 border rounded-lg">
+            <h4 class="text-xl font-semibold">Premium</h4>
+            <p class="mt-4 text-gray-600">Unlimited coffee during weekdays</p>
+            <div class="mt-6 text-3xl font-bold">₹1499</div>
+            <button class="mt-6 bg-brand text-white px-4 py-2 rounded">Purchase</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog listing -->
+    <section id="blog" class="py-16 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6">
+        <h3 class="text-sm text-brand font-semibold">FROM THE BLOG</h3>
+        <h2 class="text-3xl font-serif mt-2">Latest stories</h2>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop" alt="blog 1" class="h-48 w-full object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold">How we roast our beans</h4>
+              <p class="text-sm text-gray-600 mt-2">A behind-the-scenes look at our small-batch roasting.</p>
+              <a href="#" class="mt-4 inline-block text-brand">Read more →</a>
+            </div>
+          </article>
+          <article class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=60&auto=format&fit=crop" alt="blog 2" class="h-48 w-full object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold">Seasonal pastries to try</h4>
+              <p class="text-sm text-gray-600 mt-2">What inspired this season's menu of treats.</p>
+              <a href="#" class="mt-4 inline-block text-brand">Read more →</a>
+            </div>
+          </article>
+          <article class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&q=60&auto=format&fit=crop" alt="blog 3" class="h-48 w-full object-cover" />
+            <div class="p-4">
+              <h4 class="font-semibold">Hosting small events</h4>
+              <p class="text-sm text-gray-600 mt-2">How to plan a memorable gathering at our cafe.</p>
+              <a href="#" class="mt-4 inline-block text-brand">Read more →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ accordion -->
+    <section id="faq" class="py-16">
+      <div class="max-w-6x1 mx-auto px-6">
+        <h3 class="text-sm text-brand font-semibold">FAQ</h3>
+        <h2 class="text-3xl font-serif mt-2">Frequently asked questions</h2>
+        <div class="mt-6 space-y-3" id="faqList">
+          <details class="p-4 border rounded" open>
+            <summary class="font-semibold cursor-pointer">Do you take reservations?</summary>
+            <p class="mt-2 text-gray-600">Yes — reserve a table via our reservation form, phone, or email.</p>
+          </details>
+          <details class="p-4 border rounded">
+            <summary class="font-semibold cursor-pointer">Do you offer catering?</summary>
+            <p class="mt-2 text-gray-600">We offer small event catering and private bookings. Contact us for details.</p>
+          </details>
+          <details class="p-4 border rounded">
+            <summary class="font-semibold cursor-pointer">Do you have free Wi-Fi?</summary>
+            <p class="mt-2 text-gray-600">Yes, free Wi-Fi is available for guests.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Reservation -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div>
+          <h3 class="text-sm text-brand font-semibold">CONTACT</h3>
+          <h2 class="text-3xl font-serif mt-2">Get in touch or visit us</h2>
+          <p class="mt-4 text-gray-600">We'd love to hear from you — book a table, ask about events, or order a pastry box.</p>
+
+          <div class="mt-6 space-y-4">
+            <div>
+              <strong>Address</strong>
+              <p class="text-gray-600">Bengaluru, India</p>
+            </div>
+            <div>
+              <strong>Phone</strong>
+              <p class="text-gray-600">+91 96766 59153</p>
+            </div>
+            <div>
+              <strong>Email</strong>
+              <p class="text-gray-600">info@redescreation.in</p>
+            </div>
+            <div>
+              <strong>Website</strong>
+              <p class="text-gray-600">www.redescreation.in</p>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <iframe title="Cafe location - Bengaluru" src="https://www.google.com/maps?q=Bengaluru&output=embed" class="w-full h-56 border-0 rounded" loading="lazy" aria-hidden="false"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <form id="contactForm" class="bg-white p-6 rounded shadow" aria-label="Contact form">
+            <label class="block">
+              <span class="text-sm font-medium">Name</span>
+              <input name="name" required class="mt-1 block w-full border rounded px-3 py-2" />
+            </label>
+            <label class="block mt-3">
+              <span class="text-sm font-medium">Email</span>
+              <input name="email" type="email" required class="mt-1 block w-full border rounded px-3 py-2" />
+            </label>
+            <label class="block mt-3">
+              <span class="text-sm font-medium">Phone</span>
+              <input name="phone" type="tel" class="mt-1 block w-full border rounded px-3 py-2" />
+            </label>
+            <label class="block mt-3">
+              <span class="text-sm font-medium">Message</span>
+              <textarea name="message" rows="4" class="mt-1 block w-full border rounded px-3 py-2"></textarea>
+            </label>
+            <div class="mt-4 flex items-center gap-3">
+              <button type="submit" class="bg-brand text-white px-5 py-2 rounded">Send Message</button>
+              <p id="formStatus" class="text-sm text-gray-600"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-4">Cafe Bengaluru</h3>
+        <p>123 MG Road, Bengaluru, India</p>
+        <p>+91 96766 59153</p>
+        <p>info@redescreation.in</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-orange-500">Home</a></li>
+          <li><a href="menu.html" class="hover:text-orange-500">Menu</a></li>
+          <li><a href="gallery.html" class="hover:text-orange-500">Gallery</a></li>
+          <li><a href="about.html" class="hover:text-orange-500">About</a></li>
+          <li><a href="contact.html" class="hover:text-orange-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Opening Hours</h3>
+        <p>Mon - Fri: 10am - 10pm</p>
+        <p>Sat - Sun: 9am - 11pm</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Follow Us</h3>
+        <div class="flex space-x-4 text-xl">
+          <a href="#"><i class="fab fa-facebook hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-instagram hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-twitter hover:text-orange-500"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center text-gray-500 text-sm">&copy; 2025 Cafe Bengaluru. All Rights Reserved.</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggles
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'true');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'false');
+    });
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) { mobileMenu.classList.add('hidden'); } });
+
+    // Gallery filter
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('#galleryGrid figure').forEach(fig => {
+          if (filter === 'all' || fig.dataset.category === filter) {
+            fig.classList.remove('hidden');
+          } else {
+            fig.classList.add('hidden');
+          }
+        });
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('bg-brand','text-white'));
+        btn.classList.add('bg-brand','text-white');
+      });
+    });
+
+    // Simple testimonials carousel
+    let testiIndex = 0;
+    const track = document.querySelector('#testiTrack > div');
+    const total = track.children[0].parentElement.children[0].children.length;
+    document.getElementById('prevTesti').addEventListener('click', () => {
+      testiIndex = Math.max(0, testiIndex - 1);
+      track.style.transform = `translateX(-${testiIndex * 100}%)`;
+    });
+    document.getElementById('nextTesti').addEventListener('click', () => {
+      testiIndex = Math.min(2, testiIndex + 1);
+      track.style.transform = `translateX(-${testiIndex * 100}%)`;
+    });
+
+    // Contact form basic handler (no backend) — shows success message
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('formStatus').textContent = 'Message sent — we will reply shortly.';
+      e.target.reset();
+    });  
+
+    // Accessibility: trap focus when mobile menu opens (simple)
+    // (left minimal for clarity)
+
+  </script>
+</body>
+</html>

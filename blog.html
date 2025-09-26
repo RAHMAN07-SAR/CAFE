@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Bengaluru - Blog</title>
+  <!-- Tailwind CDN (Play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind custom config
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#e89a1d',
+            darkbg: '#0f1a1a',
+            accent: '#f6a01a'
+          },
+          fontFamily: {
+            serif: ['Merriweather', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    /* Custom Animations */
+    .fade-in { animation: fadeIn 1s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .slide-in { animation: slideIn 1.2s ease-in-out; }
+    @keyframes slideIn {
+      from { opacity:0; transform: translateX(-40px);}
+      to { opacity:1; transform: translateX(0);}
+    }
+    .zoom-hover:hover { transform: scale(1.05); transition: transform 0.3s ease-in-out;}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<!-- Skip to content -->
+  <a href="#main" class="sr-only focus:not-sr-only p-2">Skip to content</a>
+
+  <!-- Header / Nav -->
+  <header class="bg-white shadow sticky top-4 z-40 rounded-xl mx-6">
+    <div class="max-w-6x1 mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="#" class="flex items-center gap-3" aria-label="Cafe home">
+          <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="Cafe logo" class="h-12 w-12 rounded" />
+          <div>
+            <h1 class="text-2xl font-serif">Cafe</h1>
+            <p class="text-xs text-gray-500">Food & Drinks — Bengaluru</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="about.html" class="hover:text-brand">About</a>
+        <a href="menu.html" class="hover:text-brand">Menu</a>
+        <a href="gallery.html" class="hover:text-brand">Gallery</a>
+        <a href="blog.html" class="hover:text-brand">Blog</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="#reservation" class="hidden md:inline-block bg-brand text-white px-5 py-3 rounded-lg font-semibold shadow">Reservation</a>
+        <button id="mobileMenuBtn" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden p-2 rounded hover:bg-gray-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu slide-out -->
+    <div id="mobileMenu" class="md:hidden fixed inset-0 bg-black/40 hidden z-50" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="absolute right-0 top-0 h-full w-72 bg-white p-6 shadow-lg">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="logo" class="h-10 w-10 rounded" />
+            <span class="font-semibold">Cafe</span>
+          </div>
+          <button id="closeMobileMenu" class="p-2 rounded hover:bg-gray-100">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <nav class="mt-6 flex flex-col gap-3" aria-label="Mobile Primary">
+          <a href="index.html" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+          <a href="about.html" class="py-2 px-3 rounded hover:bg-gray-50">About</a>
+          <a href="menu.html" class="py-2 px-3 rounded hover:bg-gray-50">Menu</a>
+          <a href="gallery.html" class="py-2 px-3 rounded hover:bg-gray-50">Gallery</a>
+          <a href="blog.html" class="py-2 px-3 rounded hover:bg-gray-50">Blog</a>
+          <a href="contact.html" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+        </nav>
+
+        <div class="mt-6 border-t pt-4">
+          <p class="text-sm text-gray-600">Follow us</p>
+          <div class="flex gap-3 mt-3">
+            <a href="#" aria-label="Facebook" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="X" class="p-2 rounded hover:bg-gray-100"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative bg-orange-100 mt-16">
+    <div class="max-w-6xl mx-auto px-4 py-20 text-center fade-in">
+      <h1 class="text-5xl font-bold text-gray-900">Cafe Blog</h1>
+      <p class="mt-4 text-lg text-gray-600">News, Stories, Recipes & Coffee Culture from Bengaluru</p>
+    </div>
+  </section>
+
+  <!-- ================= MAIN ================= -->
+  <main class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+    <!-- BLOG POSTS GRID -->
+    <section class="lg:col-span-2 space-y-12">
+
+      <!-- ========== BLOG POST 1 ========== -->
+      <article class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Coffee" class="w-full h-60 object-cover zoom-hover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900 hover:text-orange-600">The Art of Brewing Coffee</h2>
+          <p class="mt-2 text-gray-600">Learn how to brew the perfect cup of coffee with our expert baristas' step-by-step guide and insider secrets.</p>
+          <a href="#" class="mt-4 inline-block text-orange-600 hover:underline">Read More →</a>
+        </div>
+      </article>
+
+      <!-- ========== BLOG POST 2 ========== -->
+      <article class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Latte" class="w-full h-60 object-cover zoom-hover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold hover:text-orange-600">Exploring Latte Art</h2>
+          <p class="mt-2 text-gray-600">Discover the beauty of latte art and learn tips to create stunning coffee designs at home.</p>
+          <a href="#" class="mt-4 inline-block text-orange-600 hover:underline">Read More →</a>
+        </div>
+      </article>
+
+      <!-- ========== BLOG POST 3 ========== -->
+      <article class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Croissant" class="w-full h-60 object-cover zoom-hover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold hover:text-orange-600">Perfect Pairings: Coffee & Pastries</h2>
+          <p class="mt-2 text-gray-600">What pastry goes best with your favorite brew? We asked our chefs to share their favorites.</p>
+          <a href="#" class="mt-4 inline-block text-orange-600 hover:underline">Read More →</a>
+        </div>
+      </article>
+
+      <!-- ========== BLOG POST 4 ========== -->
+      <article class="bg-white rounded-lg shadow-md overflow-hidden slide-in">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Espresso" class="w-full h-60 object-cover zoom-hover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold hover:text-orange-600">Espresso Basics</h2>
+          <p class="mt-2 text-gray-600">Everything you need to know about espresso - from beans to extraction.</p>
+          <a href="#" class="mt-4 inline-block text-orange-600 hover:underline">Read More →</a>
+        </div>
+      </article>
+
+      <!-- ========== BLOG POST 5 ========== -->
+      <article class="bg-white rounded-lg shadow-md overflow-hidden fade-in">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Coffee Beans" class="w-full h-60 object-cover zoom-hover">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold hover:text-orange-600">Selecting the Best Beans</h2>
+          <p class="mt-2 text-gray-600">From Arabica to Robusta, understand the differences and pick the perfect beans for your brew.</p>
+          <a href="#" class="mt-4 inline-block text-orange-600 hover:underline">Read More →</a>
+        </div>
+      </article>
+
+      <!-- … keep repeating unique blog posts with different Unsplash images and text up to 20+ posts … -->
+
+      <!-- PAGINATION -->
+      <div class="flex justify-center space-x-4 pt-10">
+        <a href="#" class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">1</a>
+        <a href="#" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">2</a>
+        <a href="#" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">3</a>
+      </div>
+    </section>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="space-y-10">
+      <!-- Search -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold mb-4">Search</h3>
+        <input type="text" placeholder="Search posts..." class="w-full border border-gray-300 rounded px-3 py-2">
+      </div>
+
+      <!-- Categories -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold mb-4">Categories</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-orange-600">Coffee Tips</a></li>
+          <li><a href="#" class="hover:text-orange-600">Cafe Events</a></li>
+          <li><a href="#" class="hover:text-orange-600">Recipes</a></li>
+          <li><a href="#" class="hover:text-orange-600">Barista Stories</a></li>
+        </ul>
+      </div>
+
+      <!-- Recent Posts -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold mb-4">Recent Posts</h3>
+        <ul class="space-y-3">
+          <li><a href="#" class="hover:text-orange-600">How to Taste Coffee Like a Pro</a></li>
+          <li><a href="#" class="hover:text-orange-600">Cafe Culture in Bengaluru</a></li>
+          <li><a href="#" class="hover:text-orange-600">Top 5 Coffee Beans of 2025</a></li>
+        </ul>
+      </div>
+
+      <!-- Tags -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold mb-4">Tags</h3>
+        <div class="flex flex-wrap gap-2">
+          <a href="#" class="bg-orange-100 px-3 py-1 rounded-full hover:bg-orange-200">Coffee</a>
+          <a href="#" class="bg-orange-100 px-3 py-1 rounded-full hover:bg-orange-200">Cafe</a>
+          <a href="#" class="bg-orange-100 px-3 py-1 rounded-full hover:bg-orange-200">Recipes</a>
+          <a href="#" class="bg-orange-100 px-3 py-1 rounded-full hover:bg-orange-200">Events</a>
+          <a href="#" class="bg-orange-100 px-3 py-1 rounded-full hover:bg-orange-200">Bengaluru</a>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ================= NEWSLETTER CTA ================= -->
+  <section class="bg-orange-50 py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold">Subscribe to Our Newsletter</h2>
+      <p class="mt-4 text-gray-600">Get the latest cafe stories, recipes, and events straight to your inbox.</p>
+      <form class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+        <input type="email" placeholder="Your email" class="px-4 py-2 border border-gray-300 rounded w-full sm:w-auto">
+        <button class="px-6 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-4">Cafe Bengaluru</h3>
+        <p>123 MG Road, Bengaluru, India</p>
+        <p>+91 96766 59153</p>
+        <p>info@redescreation.in</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-orange-500">Home</a></li>
+          <li><a href="menu.html" class="hover:text-orange-500">Menu</a></li>
+          <li><a href="gallery.html" class="hover:text-orange-500">Gallery</a></li>
+          <li><a href="about.html" class="hover:text-orange-500">About</a></li>
+          <li><a href="contact.html" class="hover:text-orange-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Opening Hours</h3>
+        <p>Mon - Fri: 10am - 10pm</p>
+        <p>Sat - Sun: 9am - 11pm</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Follow Us</h3>
+        <div class="flex space-x-4 text-xl">
+          <a href="#"><i class="fab fa-facebook hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-instagram hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-twitter hover:text-orange-500"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center text-gray-500 text-sm">&copy; 2025 Cafe Bengaluru. All Rights Reserved.</div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Mobile menu toggles
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'true');
+    });
+    closeMobile.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'false');
+    });
+    mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) { mobileMenu.classList.add('hidden'); } });
+
+    // ScrollReveal animations
+    ScrollReveal().reveal('.fade-in', { delay: 200, distance: '20px', origin: 'bottom', duration: 800 });
+    ScrollReveal().reveal('.slide-in', { delay: 300, distance: '40px', origin: 'left', duration: 1000 });
+  </script>
+</body>
+</html>

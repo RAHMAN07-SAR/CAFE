@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="About — Cafe Bengaluru. Our story, team, mission, and gallery. Cozy coffee shop in Bengaluru. Reserve a table or contact us." />
+  <title>About — Cafe Bengaluru | Cozy. Craft. Community.</title>
+  <!-- Tailwind CDN (Play) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind custom config
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#e89a1d',
+            darkbg: '#0f1a1a',
+            accent: '#f6a01a'
+          },
+          fontFamily: {
+            serif: ['Merriweather', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* custom small helpers */
+    .max-w-6x1 { max-width: 72rem; }
+    .hero-overlay { background: linear-gradient(90deg, rgba(11,18,18,0.85) 0%, rgba(11,18,18,0.55) 50%, rgba(11,18,18,0.2) 100%); }
+    .glass-card { backdrop-filter: blur(6px); background-color: rgba(255,255,255,0.03); }
+    /* reveal animation */
+    .reveal { opacity: 0; transform: translateY(18px); transition: all 700ms cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* simple marquee-like underline */
+    .fancy-underline { position: relative; }
+    .fancy-underline::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 40px; height: 4px; background: #e89a1d; border-radius: 4px; }
+    /* lightbox overlay */
+    .lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.8); z-index: 60; }
+    .lightbox img { max-width: 90%; max-height: 85%; border-radius: 6px; }
+    /* team hover effect */
+    .team-card { transition: transform .35s ease, box-shadow .35s ease; }
+    .team-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.25); }
+    /* testimonial slider */
+    .slider-track { transition: transform 500ms cubic-bezier(.2,.8,.2,1); }
+    /* stat counter */
+    .stat { font-weight: 700; font-size: 2rem; }
+  </style>
+</head>
+<body class="antialiased text-gray-900 bg-white">
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only p-2">Skip to content</a>
+
+  <!-- Header -->
+  <header class="sticky top-4 z-50">
+    <div class="bg-white/95 backdrop-blur rounded-xl shadow max-w-6x1 mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3" aria-label="Cafe home">
+        <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="Cafe logo" class="h-12 w-12 rounded" />
+        <div>
+          <h1 class="text-xl font-serif">Cafe</h1>
+          <p class="text-xs text-gray-500">Bengaluru</p>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Primary navigation">
+        <a href="index.html" class="hover:text-brand">Home</a>
+        <a href="menu.html" class="hover:text-brand">Menu</a>
+        <a href="about.html" class="text-brand font-semibold">About</a>
+        <a href="gallery.html" class="hover:text-brand">Gallery</a>
+        <a href="blog.html" class="hover:text-brand">Blog</a>
+        <a href="contact.html" class="hover:text-brand">Contact</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="#reservation" class="hidden lg:inline-block bg-brand text-white px-5 py-2 rounded-lg shadow">Reservation</a>
+        <button id="hamburger" class="lg:hidden p-2 rounded bg-white shadow" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-black/40 hidden z-40" role="dialog" aria-modal="true">
+      <div class="absolute left-0 top-0 w-80 h-full bg-white p-6 shadow-lg">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <img src="https://cdn.dribbble.com/users/2898742/screenshots/5660488/logo.jpg" alt="logo" class="h-10 w-10 rounded" />
+            <span class="font-semibold">Cafe</span>
+          </div>
+          <button id="closeMobile" class="p-2 rounded hover:bg-gray-100" aria-label="Close menu">✕</button>
+        </div>
+        <nav class="mt-6 flex flex-col gap-3">
+          <a href="index.html" class="py-2 px-3 rounded hover:bg-gray-50">Home</a>
+          <a href="menu.html" class="py-2 px-3 rounded hover:bg-gray-50">Menu</a>
+          <a href="about.html" class="py-2 px-3 rounded bg-brand text-white">About</a>
+          <a href="gallery.html" class="py-2 px-3 rounded hover:bg-gray-50">Gallery</a>
+          <a href="blog.html" class="py-2 px-3 rounded hover:bg-gray-50">Blog</a>
+          <a href="contact.html" class="py-2 px-3 rounded hover:bg-gray-50">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=60&auto=format&fit=crop');">
+      <div class="hero-overlay py-36">
+        <div class="max-w-6x1 mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="text-white">
+            <p class="text-sm text-brand font-semibold mb-3">ABOUT US</p>
+            <h2 class="text-5xl md:text-6xl font-serif leading-tight">Our Story — Craft Coffee & Community</h2>
+            <p class="mt-6 text-lg text-white/80 max-w-2xl">We have been serving small-batch roasted coffee and handmade pastries with love in Bengaluru. From the bean to the cup, we focus on quality, sustainability, and a warm experience for every guest.</p>
+            <div class="mt-8 flex items-center gap-4">
+              <a href="#our-mission" class="bg-brand px-6 py-3 rounded-lg text-white font-semibold shadow hover:opacity-95">Our Mission</a>
+              <a href="#team" class="text-white/80 hover:underline">Meet the team</a>
+            </div>
+          </div>
+          <div class="hidden lg:block">
+            <div class="bg-white/5 p-6 rounded-xl glass-card shadow-lg">
+              <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=900&q=60&auto=format&fit=crop" alt="Barista preparing coffee" class="rounded-lg shadow" />
+              <p class="mt-4 text-sm text-white/80">From single-origin espresso to seasonal pastries — crafted daily by our team.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About story and timeline -->
+    <section id="our-mission" class="py-20 bg-white">
+      <div class="max-w-6x1 mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <h3 class="text-sm text-brand font-semibold">OUR MISSION</h3>
+          <h2 class="text-3xl md:text-4xl font-serif mt-2">Quality Coffee, Ethical Sourcing, Local Community</h2>
+          <p class="mt-6 text-gray-600">Founded in 2016, Cafe Bengaluru began as a small neighbourhood shop with the goal of bringing transparent sourcing and quality roasting to local coffee lovers. We build relationships with farmers, roast in small batches, and train our baristas to extract the best flavours from each roast.</p>
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 border rounded-lg reveal">
+              <h4 class="font-semibold">Sustainability</h4>
+              <p class="text-sm text-gray-600 mt-2">We partner with smallholder farms and invest in ethical trade practices.</p>
+            </div>
+            <div class="p-4 border rounded-lg reveal">
+              <h4 class="font-semibold">Community</h4>
+              <p class="text-sm text-gray-600 mt-2">Events, workshops and local collaborations to strengthen neighbourhood ties.</p>
+            </div>
+            <div class="p-4 border rounded-lg reveal">
+              <h4 class="font-semibold">Craftsmanship</h4>
+              <p class="text-sm text-gray-600 mt-2">Small-batch roasting and precise brewing for consistent quality.</p>
+            </div>
+            <div class="p-4 border rounded-lg reveal">
+              <h4 class="font-semibold">Transparency</h4>
+              <p class="text-sm text-gray-600 mt-2">Clear traceability of beans and honest menus.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+            <h4 class="font-semibold">Our Timeline</h4>
+            <ol class="mt-4 space-y-6">
+              <li class="flex gap-4 items-start">
+                <div class="h-3 w-3 rounded-full bg-brand mt-2"></div>
+                <div>
+                  <strong>2016</strong>
+                  <p class="text-sm text-gray-600">Cafe opens its doors to the local community.</p>
+                </div>
+              </li>
+              <li class="flex gap-4 items-start">
+                <div class="h-3 w-3 rounded-full bg-brand mt-2"></div>
+                <div>
+                  <strong>2018</strong>
+                  <p class="text-sm text-gray-600">We introduced our small-batch roasting program.</p>
+                </div>
+              </li>
+              <li class="flex gap-4 items-start">
+                <div class="h-3 w-3 rounded-full bg-brand mt-2"></div>
+                <div>
+                  <strong>2020</strong>
+                  <p class="text-sm text-gray-600">Adapted to new safety measures while expanding our online orders.</p>
+                </div>
+              </li>
+              <li class="flex gap-4 items-start">
+                <div class="h-3 w-3 rounded-full bg-brand mt-2"></div>
+                <div>
+                  <strong>2023</strong>
+                  <p class="text-sm text-gray-600">Launched event hosting and barista training workshops.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why choose us features -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h3 class="text-sm text-brand font-semibold">WHY CHOOSE US</h3>
+        <h2 class="text-3xl font-serif mt-2">Carefully curated from bean to cup</h2>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-6 bg-white rounded-lg shadow reveal">
+            <div class="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold"><i class="fa-solid fa-mug-hot"></i></div>
+            <h4 class="mt-4 font-semibold">Exceptional Brews</h4>
+            <p class="text-sm text-gray-600 mt-2">Precision brewing and seasonal menus.</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow reveal">
+            <div class="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold"><i class="fa-solid fa-cake-candles"></i></div>
+            <h4 class="mt-4 font-semibold">Bakery Fresh</h4>
+            <p class="text-sm text-gray-600 mt-2">Daily pastries baked in-house.</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow reveal">
+            <div class="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold"><i class="fa-solid fa-tree"></i></div>
+            <h4 class="mt-4 font-semibold">Sustainable Sourcing</h4>
+            <p class="text-sm text-gray-600 mt-2">Partnered with ethical growers worldwide.</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow reveal">
+            <div class="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold"><i class="fa-solid fa-handshake"></i></div>
+            <h4 class="mt-4 font-semibold">Community Focused</h4>
+            <p class="text-sm text-gray-600 mt-2">Events, workshops, and meetups all year round.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team / Chefs -->
+    <section id="team" class="py-20 bg-white">
+      <div class="max-w-6x1 mx-auto px-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm text-brand font-semibold">OUR TEAM</h3>
+            <h2 class="text-3xl font-serif mt-2">Meet the people crafting your experience</h2>
+          </div>
+          <div>
+            <a href="#careers" class="text-sm text-brand font-semibold">Join our team →</a>
+          </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <!-- Team member -->
+          <div class="team-card p-4 border rounded-lg text-center bg-white reveal">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=60&auto=format&fit=crop" alt="Chef - Anjali" class="mx-auto h-44 w-44 object-cover rounded-full shadow-lg" />
+            <h4 class="mt-4 font-semibold">Anjali Rao</h4>
+            <p class="text-sm text-gray-600">Head Barista</p>
+            <p class="mt-3 text-sm text-gray-500">Anjali trains our baristas and curates monthly brew menus, focused on extraction profiles and tasting notes.</p>
+            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+              <a href="#" aria-label="instagram">IG</a>
+              <a href="#" aria-label="linkedin">IN</a>
+            </div>
+          </div>
+
+          <div class="team-card p-4 border rounded-lg text-center bg-white reveal">
+            <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=800&q=60&auto=format&fit=crop" alt="Chef - Ravi" class="mx-auto h-44 w-44 object-cover rounded-full shadow-lg" />
+            <h4 class="mt-4 font-semibold">Ravi Kumar</h4>
+            <p class="text-sm text-gray-600">Head Baker</p>
+            <p class="mt-3 text-sm text-gray-500">Ravi brings European pastry techniques adapted for local ingredients and flavours.</p>
+            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+              <a href="#" aria-label="instagram">IG</a>
+              <a href="#" aria-label="linkedin">IN</a>
+            </div>
+          </div>
+
+          <div class="team-card p-4 border rounded-lg text-center bg-white reveal">
+            <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=800&q=60&auto=format&fit=crop" alt="Manager - Neha" class="mx-auto h-44 w-44 object-cover rounded-full shadow-lg" />
+            <h4 class="mt-4 font-semibold">Neha Singh</h4>
+            <p class="text-sm text-gray-600">General Manager</p>
+            <p class="mt-3 text-sm text-gray-500">Neha ensures seamless guest experiences and coordinates events and private bookings.</p>
+            <div class="mt-4 flex items-center justify-center gap-3 text-gray-500">
+              <a href="#" aria-label="instagram">IG</a>
+              <a href="#" aria-label="linkedin">IN</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery with lightbox -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm text-brand font-semibold">GALLERY</h3>
+            <h2 class="text-3xl font-serif mt-2">Moments from the cafe</h2>
+          </div>
+          <div class="flex gap-3">
+            <button class="px-4 py-2 rounded border" data-filter="all">All</button>
+            <button class="px-4 py-2 rounded border" data-filter="interior">Interior</button>
+            <button class="px-4 py-2 rounded border" data-filter="food">Food</button>
+            <button class="px-4 py-2 rounded border" data-filter="people">People</button>
+          </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4" id="aboutGallery">
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="interior">
+            <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=800&q=60&auto=format&fit=crop" alt="outdoor seating" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="food">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=60&auto=format&fit=crop" alt="fresh pastries" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="people">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&q=60&auto=format&fit=crop" alt="bar counter" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="food">
+            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=60&auto=format&fit=crop" alt="latte art" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="interior">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop" alt="interior" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="people">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop" alt="guests" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="food">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=60&auto=format&fit=crop" alt="cakes" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+          <figure class="overflow-hidden rounded-lg cursor-pointer" data-category="interior">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=60&auto=format&fit=crop" alt="shelves" class="w-full h-48 object-cover transform hover:scale-105 transition" />
+          </figure>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+          <button id="lightboxClose" class="absolute top-6 right-6 text-white text-2xl p-2">✕</button>
+          <img id="lightboxImg" src="" alt="Expanded" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats / Counters -->
+    <section class="py-16 bg-white">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h3 class="text-sm text-brand font-semibold">BY THE NUMBERS</h3>
+        <h2 class="text-3xl font-serif mt-2">A little about our scale</h2>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="p-6 bg-gray-50 rounded-lg shadow reveal">
+            <div class="stat" data-target="12000">0</div>
+            <div class="text-sm text-gray-600 mt-2">Cups of coffee served</div>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg shadow reveal">
+            <div class="stat" data-target="420">0</div>
+            <div class="text-sm text-gray-600 mt-2">Pastries baked</div>
+          </div>
+          <div class="p-6 bg-gray-50 rounded-lg shadow reveal">
+            <div class="stat" data-target="350">0</div>
+            <div class="text-sm text-gray-600 mt-2">Events & workshops</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials slider -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h3 class="text-sm text-brand font-semibold">TESTIMONIALS</h3>
+        <h2 class="text-3xl font-serif mt-2">What guests say about us</h2>
+        <div class="mt-8 relative">
+          <div class="overflow-hidden">
+            <div id="sliderTrack" class="flex slider-track" style="width:300%">
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"Anjali's cappuccino is as good as it gets — smooth, balanced and consistent every time."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Rakshit, Bangalore</footer>
+              </blockquote>
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"The croissants melt in your mouth — baker Ravi knows his craft."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Meera, Bangalore</footer>
+              </blockquote>
+              <blockquote class="w-full p-8">
+                <p class="text-lg">"Great vibe for work meetings and casual catchups."</p>
+                <footer class="mt-4 text-sm text-gray-600">— Shyam, Bangalore</footer>
+              </blockquote>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-center gap-3">
+            <button id="prev" class="p-2 rounded border">◀</button>
+            <button id="next" class="p-2 rounded border">▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ accordion -->
+    <section class="py-16 bg-white">
+      <div class="max-w-6x1 mx-auto px-6">
+        <h3 class="text-sm text-brand font-semibold">FAQ</h3>
+        <h2 class="text-3xl font-serif mt-2">Questions guests ask</h2>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <details class="p-4 border rounded reveal">
+            <summary class="font-semibold cursor-pointer">Do you accept reservations?</summary>
+            <p class="mt-2 text-gray-600">Yes, reserve a table via the reservation button or call us at +91 96766 59153.</p>
+          </details>
+          <details class="p-4 border rounded reveal">
+            <summary class="font-semibold cursor-pointer">Do you have vegan options?</summary>
+            <p class="mt-2 text-gray-600">Yes — we have plant-based milk and vegan pastries available daily.</p>
+          </details>
+          <details class="p-4 border rounded reveal">
+            <summary class="font-semibold cursor-pointer">Can I host an event?</summary>
+            <p class="mt-2 text-gray-600">We host small events and workshops. Contact us for availability and catering options.</p>
+          </details>
+          <details class="p-4 border rounded reveal">
+            <summary class="font-semibold cursor-pointer">Do you offer gift cards?</summary>
+            <p class="mt-2 text-gray-600">Gift cards can be purchased in-store or requested via email.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-gradient-to-r from-white to-gray-50">
+      <div class="max-w-6x1 mx-auto px-6 text-center">
+        <h2 class="text-3xl font-serif">Ready to visit or host with us?</h2>
+        <p class="mt-4 text-gray-600">Book a table, order a pastry box, or reach out for events — we are here to help.</p>
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <a href="contact.html" class="bg-brand px-6 py-3 rounded text-white font-semibold">Contact Us</a>
+          <a href="#reservation" class="px-6 py-3 rounded border">Reserve Table</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Short contact block -->
+    <section id="contact" class="py-16 bg-white">
+      <div class="max-w-6x1 mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="text-sm text-brand font-semibold">GET IN TOUCH</h3>
+          <h2 class="text-3xl font-serif mt-2">Contact & Visit</h2>
+          <p class="mt-4 text-gray-600">Questions about bookings, events or wholesale? Send us a message — we'll reply within 24 hours.</p>
+          <ul class="mt-6 text-sm text-gray-700 space-y-3">
+            <li><strong>Address:</strong> Bengaluru, India</li>
+            <li><strong>Phone:</strong> +91 96766 59153</li>
+            <li><strong>Email:</strong> info@redescreation.in</li>
+            <li><strong>Website:</strong> www.redescreation.in</li>
+          </ul>
+          <div class="mt-6">
+            <iframe title="Cafe location" src="https://www.google.com/maps?q=Bengaluru&output=embed" class="w-full h-48 border-0 rounded" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div>
+          <form id="aboutContactForm" class="p-6 border rounded-lg shadow bg-gray-50">
+            <label class="block">
+              <span class="text-sm font-medium">Name</span>
+              <input name="name" required class="mt-1 block w-full border rounded px-3 py-2" />
+            </label>
+            <label class="block mt-3">
+              <span class="text-sm font-medium">Email</span>
+              <input name="email" type="email" required class="mt-1 block w-full border rounded px-3 py-2" />
+            </label>
+            <label class="block mt-3">
+              <span class="text-sm font-medium">Message</span>
+              <textarea name="message" rows="4" class="mt-1 block w-full border rounded px-3 py-2"></textarea>
+            </label>
+            <div class="mt-4 flex items-center gap-4">
+              <button type="submit" class="bg-brand text-white px-5 py-2 rounded">Send Message</button>
+              <p id="aboutFormStatus" class="text-sm text-gray-600"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-white font-bold mb-4">Cafe Bengaluru</h3>
+        <p>123 MG Road, Bengaluru, India</p>
+        <p>+91 96766 59153</p>
+        <p>info@redescreation.in</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="index.html" class="hover:text-orange-500">Home</a></li>
+          <li><a href="menu.html" class="hover:text-orange-500">Menu</a></li>
+          <li><a href="gallery.html" class="hover:text-orange-500">Gallery</a></li>
+          <li><a href="about.html" class="hover:text-orange-500">About</a></li>
+          <li><a href="contact.html" class="hover:text-orange-500">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Opening Hours</h3>
+        <p>Mon - Fri: 10am - 10pm</p>
+        <p>Sat - Sun: 9am - 11pm</p>
+      </div>
+      <div>
+        <h3 class="text-white font-bold mb-4">Follow Us</h3>
+        <div class="flex space-x-4 text-xl">
+          <a href="#"><i class="fab fa-facebook hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-instagram hover:text-orange-500"></i></a>
+          <a href="#"><i class="fab fa-twitter hover:text-orange-500"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 text-center text-gray-500 text-sm">&copy; 2025 Cafe Bengaluru. All Rights Reserved.</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggles
+    const hamburger = document.getElementById('hamburger');
+    const mobile = document.getElementById('mobileMenu');
+    const closeMobile = document.getElementById('closeMobile');
+    hamburger.addEventListener('click', () => { mobile.classList.remove('hidden'); });
+    closeMobile.addEventListener('click', () => { mobile.classList.add('hidden'); });
+    mobile.addEventListener('click', (e) => { if (e.target === mobile) mobile.classList.add('hidden'); });
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // Lightbox logic
+    const gallery = document.getElementById('aboutGallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    gallery.querySelectorAll('figure img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src.replace('w=800','w=1600');
+        lightbox.style.display = 'flex';
+      });
+    });
+    lightboxClose.addEventListener('click', () => { lightbox.style.display = 'none'; });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+
+    // Gallery filter
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('#aboutGallery figure').forEach(fig => {
+          if (filter === 'all' || fig.dataset.category === filter) fig.classList.remove('hidden'); else fig.classList.add('hidden');
+        });
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('bg-brand','text-white'));
+        btn.classList.add('bg-brand','text-white');
+      });
+    });
+
+    // Stat counters (simple) when visible
+    const stats = document.querySelectorAll('.stat');
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          let current = 0;
+          const step = Math.ceil(target / 120);
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { el.textContent = target; clearInterval(timer); }
+            else el.textContent = current;
+          }, 12);
+          statObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.2 });
+    stats.forEach(s => statObserver.observe(s));
+
+    // Testimonials slider
+    let index = 0;
+    const track = document.getElementById('sliderTrack');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    prevBtn.addEventListener('click', () => { index = Math.max(0, index - 1); track.style.transform = `translateX(-${index * 100}%)`; });
+    nextBtn.addEventListener('click', () => { index = Math.min(2, index + 1); track.style.transform = `translateX(-${index * 100}%)`; });
+
+    // Contact forms (local success only)
+    document.getElementById('aboutContactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('aboutFormStatus').textContent = 'Thanks — we\'ll be in touch soon.';
+      e.target.reset();
+    }); 
+ 
+    // Small accessibility enhancement: allow keyboard close for lightbox
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!lightbox.style.display || lightbox.style.display === 'none') return;
+        lightbox.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
